@@ -1,0 +1,63 @@
+class Estudiante:
+    def __init__(self, nombre, codigo):
+        self.__nombre = nombre
+        self.__codigo = codigo
+        self.__notas = []
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @nombre.setter
+    def nombre(self, nuevo_nombre):
+        if nuevo_nombre == "":
+            print("El nombre no debe estar vacío")
+        else:
+            self.__nombre = nuevo_nombre
+
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    @codigo.setter
+    def codigo(self, nuevo_codigo):
+        if nuevo_codigo.isalnum():
+            self.__codigo = nuevo_codigo
+        else:
+            print("El código debe ser alfanumérico")
+
+    def agregar_nota(self, nota):
+        if 0.0 <= nota <= 5.0:
+            self.__notas.append(nota)  
+        else:
+            print("La nota debe estar entre 0.0 y 5.0")
+
+    def calcular_promedio(self):
+        if len(self.__notas) == 0:
+            return 0.0
+        return sum(self.__notas) / len(self.__notas)
+
+    def esta_aprobado(self):  
+        return self.calcular_promedio() >= 3.0
+
+
+est1 = Estudiante("Dylan", "A123")
+
+print("Nombre:", est1.nombre)
+print("Código:", est1.codigo)
+
+est1.nombre = ""
+est1.codigo = "##$$"
+
+est1.agregar_nota(4.5)
+est1.agregar_nota(3.0)
+est1.agregar_nota(2.5)
+
+est1.agregar_nota(6.0)  
+
+print("Promedio:", est1.calcular_promedio())
+
+if est1.esta_aprobado():
+    print("Aprobado")
+else:
+    print("Reprobado")
