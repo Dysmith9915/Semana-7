@@ -1,0 +1,24 @@
+class Transporte:
+    def tipo_transporte(self):
+        print ("Tipo de trasnporte no identificado")
+
+
+class Coche(Transporte):
+    def tipo_transporte(self):
+      print ("Tipo de trasnporte terrestre")
+
+class Avion(Transporte):
+    def tipo_transporte(self):
+        print ("Tipo de trasnporte aereo")
+
+class Barco(Transporte):
+    def tipo_transporte(self):
+        print ("Tipo de trasnporte maritimo")
+
+Coche= Coche()
+Avion=Avion()
+Barco=Barco()
+
+Coche.tipo_transporte()
+Avion.tipo_transporte()
+Barco.tipo_transporte()
