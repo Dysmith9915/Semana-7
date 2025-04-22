@@ -1,0 +1,26 @@
+class Empleado:
+    def __init__(self, nombre, rol, clave):
+        self.__nombre = nombre
+        self.__rol = rol
+        self.__clave_acceso = self.__cifrar(clave)
+
+    def __cifrar(self, texto):
+        return texto[::-1]
+
+    def __descifrar(self, clave_encriptada):
+        return clave_encriptada[::-1]
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @property
+    def rol(self):
+        return self.__rol
+
+    # Método de verificación de clave
+    def verificar_clave(self, clave_ingresada):
+        return self.__cifrar(clave_ingresada) == self.__clave_acceso
+
+    def cambiar_clave(self, clave_antigua, nueva_clave):
+        if self.verificar_clave(c
