@@ -1,0 +1,92 @@
+# Clase padre Persona
+class Persona:
+    def __init__(self, nombre, edad, documento):
+        self.__nombre = nombre
+        self.__documento = documento
+        self.__edad = None
+        self.edad = edad  # Validación usando el setter
+
+    # Getter y setter para el atributo nombre
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @nombre.setter
+    def nombre(self, valor):
+        self.__nombre = valor
+
+    # Getter y setter para el atributo edad
+    @property
+    def edad(self):
+        return self.__edad
+
+    @edad.setter
+    def edad(self, valor):
+        if valor < 0:
+            raise ValueError("La edad debe ser mayor o igual a 0.")
+        self.__edad = valor
+
+    # Getter y setter para el atributo documento
+    @property
+    def documento(self):
+        return self.__documento
+
+    @documento.setter
+    def documento(self, valor):
+        self.__documento = valor
+
+# Clase hija Paciente
+class Paciente(Persona):
+    def __init__(self, nombre, edad, documento, diagnostico):
+        super().__init__(nombre, edad, documento)  # Inicializa atributos heredados
+        self.__diagnostico = diagnostico
+        self.__historial = []  # Inicializa la lista de historial
+
+    # Método para agregar entradas al historial
+    def agregar_historial(self, entrada):
+        self.__historial.append(entrada)
+
+    # Método para ver el historial completo
+    def ver_historial(self):
+        return self.__historial
+
+    # Método para ver el diagnóstico actual
+    def ver_diagnostico(self):
+        return self.__diagnostico
+
+# Clase hija Doctor
+class Doctor(Persona):
+    def __init__(self, nombre, edad, documento, especialidad):
+        super().__init__(nombre, edad, documento)  # Inicializa atributos heredados
+        self.__especialidad = especialidad
+
+    # Método para ver la especialidad del doctor
+    def ver_especialidad(self):
+        return self.__especialidad
+
+    # Método para modificar el diagnóstico de un paciente
+    def modificar_diagnostico(self, paciente, nuevo_diagnostico):
+        if isinstance(paciente, Paciente):
+            paciente._Paciente__diagnostico = nuevo_diagnostico  # Modifica el diagnóstico
+        else:
+            raise TypeError("El objeto proporcionado no es un Paciente.")
+
+# Ejemplo
+try:
+    # Creación de un paciente
+    paciente = Paciente("Pedro", 30, "123456", "Diagnóstico inicial")
+    paciente.agregar_historial("Consulta: Dolor de cabeza")
+    print(f"Historial del paciente: {paciente.ver_historial()}")
+    print(f"Diagnóstico del paciente: {paciente.ver_diagnostico()}")
+
+    # Creación de un doctor
+    doctor = Doctor("Dra. María", 50, "654321", "Neurología")
+    print(f"Especialidad del doctor: {doctor.ver_especialidad()}")
+
+    # Doctor modifica el diagnóstico del paciente
+    doctor.modificar_diagnostico(paciente, "Nuevo diagnóstico: Migraña")
+    print(f"Diagnóstico actualizado del paciente: {paciente.ver_diagnostico()}")
+except ValueError as e:
+    print(f"Error: {e}")
+except TypeError as e:
+    print(f"Error: {e}")
