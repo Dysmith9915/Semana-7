@@ -1,0 +1,33 @@
+class CarteraCripto:
+    # Inicializamos los atributos privados
+    def __init__(self, usuario):
+        self.__usuario = usuario
+        self.__saldo_btc = 0.0  # Saldo inicial de BTC, comienza en 0.0
+
+    # Método para consultar el saldo actual de BTC
+    def consultar_saldo(self):
+        return f"Saldo actual de BTC: {self.__saldo_btc:.8f}"
+
+    # Método para comprar BTC usando USD
+    def comprar_btc(self, monto_usd, precio_actual_btc):
+        # Convertimos de USD a BTC
+        btc_comprado = monto_usd / precio_actual_btc
+        self.__saldo_btc += btc_comprado  # Sumamos el BTC comprado al saldo
+        return f"Has comprado {btc_comprado:.8f} BTC."
+
+    def vender_btc(self, monto_btc, precio_actual_btc):
+        if monto_btc > self.__saldo_btc:
+            # No se puede vender más BTC del saldo disponible
+            return "Error: No tienes suficiente saldo en BTC para esta transacción."
+        else:
+            self.__saldo_btc -= monto_btc  # Restamos el BTC vendido del saldo
+            monto_usd = monto_btc * precio_actual_btc 
+            return f"Has vendido {monto_btc:.8f} BTC por ${monto_usd:.2f} USD."
+
+# Ejemplo 
+mi_cartera = CarteraCripto("Dylan")
+print(mi_cartera.consultar_saldo())  # Consulta inicial del saldo
+print(mi_cartera.comprar_btc(1000, 30000))  # Comprar BTC con $1000 USD (precio BTC $30000)
+print(mi_cartera.consultar_saldo())  # Consulta del saldo después de la compra
+print(mi_cartera.vender_btc(0.02, 30000))  # Vender 0.02 BTC
+print(mi_cartera.consultar_saldo())  # Consulta del saldo después de la venta
