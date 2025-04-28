@@ -1,0 +1,34 @@
+class Transporte:
+    def tipo_transporte(self):
+        print("Tipo de transporte no identificado")
+
+# Clase hija Coche, que hereda de Transporte
+class Coche(Transporte):
+    def tipo_transporte(self):
+        print("Tipo de transporte terrestre")
+
+
+class Avion(Transporte):
+    def tipo_transporte(self):
+        print("Tipo de transporte aéreo")
+
+class Barco(Transporte):
+    def tipo_transporte(self):
+        print("Tipo de transporte marítimo")
+
+# Creación de una instancia de la clase Coche
+Coche = Coche()
+
+Avion = Avion()
+
+Barco = Barco()
+
+# Llamada al método tipo_transporte de la clase Coche
+Coche.tipo_transporte()  # Salida: Tipo de transporte terrestre
+
+Avion.tipo_transporte()  
+
+Barco.tipo_transporte()  
+
+transporte_generico = Transporte()
+transporte_generico.tipo_transporte() 
