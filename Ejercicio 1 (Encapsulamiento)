@@ -41,10 +41,10 @@ class Estudiante:
 
 # Ejemplo 
 try:
-    estudiante = Estudiante(" ", "123ABC")
-    estudiante.agregar_nota(2.0)
+    estudiante = Estudiante(" Dylan ", "123ABC")
+    estudiante.agregar_nota(4.0)
     estudiante.agregar_nota(3.5)
     print(f"Promedio: {estudiante.calcular_promedio():.2f}")
-    print(f"¿Aprobado?: {estudiante.es_aprobado()}")
+    print(f"{estudiante.es_aprobado()}")
 except ValueError as e:
     print(f"Error: {e}")
