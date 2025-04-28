@@ -1,26 +1,60 @@
 class Empleado:
+    # Constructor de la clase Empleado
     def __init__(self, nombre, rol, clave):
+        # Asigna el nombre del empleado como un atributo privado
         self.__nombre = nombre
+        # Asigna el rol del empleado como un atributo privado
         self.__rol = rol
+        # Cifra la clave proporcionada y la almacena como un atributo privado
         self.__clave_acceso = self.__cifrar(clave)
 
+    # Método privado para cifrar una cadena de texto
     def __cifrar(self, texto):
+        # Realiza un "cifrado" básico invirtiendo la cadena
         return texto[::-1]
 
+    # Método privado para descifrar una cadena previamente cifrada
     def __descifrar(self, clave_encriptada):
+        # Invierte la cadena nuevamente 
         return clave_encriptada[::-1]
 
+ 
     @property
     def nombre(self):
+ 
         return self.__nombre
 
+    # Propiedad para obtener el rol del empleado
     @property
     def rol(self):
+ 
         return self.__rol
 
-    # Método de verificación de clave
+    # Método para verificar si la clave ingresada coincide con la almacenada
     def verificar_clave(self, clave_ingresada):
+   
         return self.__cifrar(clave_ingresada) == self.__clave_acceso
 
+    # Método para cambiar la clave de acceso del empleado
     def cambiar_clave(self, clave_antigua, nueva_clave):
-        if self.verificar_clave(c
+     
+        if self.verificar_clave(clave_antigua):
+            # Si la clave antigua es correcta, cifra la nueva clave y la almacena
+            self.__clave_acceso = self.__cifrar(nueva_clave)
+            print("La clave ha sido actualizada correctamente.")  # Mensaje de éxito
+        else:
+            # Si la clave antigua es incorrecta, muestra un mensaje de error
+            print("La clave antigua es incorrecta. No se realizó el cambio.")
+
+empleado1 = Empleado("Dylan", "Ingeniero", "clave123")  
+
+
+print("Nombre:", empleado1.nombre) 
+print("Rol:", empleado1.rol)     
+
+
+print("Clave correcta:", empleado1.verificar_clave("clave123"))  # Devuelve True si la clave es correcta
+print("Clave incorrecta:", empleado1.verificar_clave("clave124"))  # Devuelve False si la clave no coincide
+
+empleado1.cambiar_clave("clave123", "nuevaClave456")  # Éxito porque la clave antigua es correcta
+empleado1.cambiar_clave("claveIncorrecta", "nuevaClave789")  # Fallo porque la clave antigua es incorrecta
