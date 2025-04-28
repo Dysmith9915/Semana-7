@@ -1,0 +1,54 @@
+class Empleado:
+    def __init__(self, nombre, sueldo_base):
+        self.nombre = nombre 
+        self.__sueldo_base = sueldo_base  
+
+    # Getter para el sueldo base
+    @property
+    def sueldo_base(self):
+        return self.__sueldo_base
+
+    # Setter para el sueldo base y validacion
+    @sueldo_base.setter
+    def sueldo_base(self, valor):
+        if valor < 0:
+            raise ValueError("El sueldo base no puede ser negativo.")
+        self.__sueldo_base = valor
+
+    def calcular_salario(self):
+        return self.sueldo_base
+
+# Clase hija EmpleadoFijo
+class EmpleadoFijo(Empleado):
+    def calcular_salario(self):
+        return self.sueldo_base  # Su salario siempre será el sueldo mínimo en este caso
+
+# Clase hija EmpleadoPorHoras
+class EmpleadoPorHoras(Empleado):
+    def __init__(self, nombre, sueldo_base, horas):
+        super().__init__(nombre, sueldo_base)  # Llama al constructor de la clase base
+        self.horas = horas  
+
+    def calcular_salario(self):
+        tarifa_por_hora = 6189  # Tarifa por hora en Colombia
+        return self.horas * tarifa_por_hora
+
+# Clase hija EmpleadoTemporal
+class EmpleadoTemporal(Empleado):
+    def __init__(self, nombre, sueldo_base, dias_trabajados):
+        super().__init__(nombre, sueldo_base)  # Llamada al constructor de la clase base
+        self.dias_trabajados = dias_trabajados  
+
+    def calcular_salario(self):
+        tarifa_por_dia = 49512  # Tarifa por día en colombia
+        return self.dias_trabajados * tarifa_por_dia
+
+empleados = [
+    EmpleadoFijo("Dylan", 1423500),  
+    EmpleadoPorHoras("Dayiris", 0, 120),  
+    EmpleadoTemporal("Lucho", 0, 21)  
+]
+
+# Salarios de los empleados
+for empleado in empleados:
+    print(f"Empleado: {empleado.nombre}, Salario: ${empleado.calcular_salario():,.0f}")
